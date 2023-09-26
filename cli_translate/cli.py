@@ -3,7 +3,7 @@ from typing import Optional
 
 import typer
 
-from cli_translate4ru import __app_name__, __version__
+from cli_translate import __app_name__, __version__
 
 app = typer.Typer()
 

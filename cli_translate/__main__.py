@@ -1,4 +1,4 @@
-from cli_translate4ru import __app_name__, cli
+from cli_translate import __app_name__, cli
 
 
 def main() -> None:

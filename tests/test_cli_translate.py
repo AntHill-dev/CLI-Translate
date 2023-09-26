@@ -1,6 +1,6 @@
 from typer.testing import CliRunner
 
-from cli_translate4ru import __app_name__, __version__, cli
+from cli_translate import __app_name__, __version__, cli
 
 runner = CliRunner()
 
