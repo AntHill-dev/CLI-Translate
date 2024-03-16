@@ -93,7 +93,7 @@ clean:  ## Clear linter cache (.mypy_cache .ruff_cache)
 
 .PHONY: test
 test:  ## Runs tests for the application
-	poetry run python -m pytest $(TEST_FOLDER)
+	poetry run python -m pytest --verbose $(TEST_FOLDER)
 
 # Other
 ##############################################################################
