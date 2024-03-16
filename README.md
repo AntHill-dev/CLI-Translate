@@ -34,7 +34,7 @@
     <img src="https://img.shields.io/github/license/Qu1nel/CLI-Translate?color=g" alt="license" />
   </a>
   <a href="">
-    <img src="https://img.shields.io/github/actions/workflow/status/Qu1nel/CLI-Translate/python_linting.yml?label=Linting" alt="linting" />
+    <img src="https://img.shields.io/github/actions/workflow/status/Qu1nel/CLI-Translate/python_lintings.yml?label=Linting" alt="linting" />
   </a>
   <a href="">
     <img src="https://img.shields.io/github/actions/workflow/status/Qu1nel/CLI-Translate/python_tests.yml?label=Tests" alt="tests" />
