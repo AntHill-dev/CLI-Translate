@@ -484,6 +484,16 @@ files = [
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
+name = "pyperclip"
+version = "1.8.2"
+description = "A cross-platform clipboard module for Python. (Only handles plain text for now.)"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyperclip-1.8.2.tar.gz", hash = "sha256:105254a8b04934f0bc84e9c24eb360a591aaf6535c9def5f29d92af107a9bf57"},
+]
+
+[[package]]
 name = "pyright"
 version = "1.1.352"
 description = "Command line wrapper for pyright"
@@ -676,4 +686,4 @@ dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "ac1b5c16a4ca061896d2d84f446d420c34d61e8f8f3a1d35d9ede8ce039fff73"
+content-hash = "916caf02d6ec64f370fc2db2cbd3bd04bb9955878179d2b74a0052a5b4389638"
