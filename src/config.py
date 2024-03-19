@@ -11,7 +11,7 @@ class _MetaInfo(BaseModel):
 
     maintainer: str = "Ivan Kovach"
     email: str = "covach.qn@gmail.com"
-    status: str = "Development"
+    status: str = "Production"
 
     prog_name: str = "CLI-Translate"
 
