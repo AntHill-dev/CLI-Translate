@@ -39,6 +39,9 @@
   <a href="">
     <img src="https://img.shields.io/github/actions/workflow/status/Qu1nel/CLI-Translate/python_tests.yml?label=Tests" alt="tests" />
   </a>
+  <a href="">
+    <img src="./.github/assets/coverage.svg" alt="coverage tests" />
+  </a>
 </p>
 
 <h4>
@@ -74,11 +77,25 @@
 
 CLI-Translate is a powerful multilingual text translation console utility developed in Python. This program provides a fast and reliable way to translate words, phrases, and even whole sentences into different languages.
 
+#### Features
+
+* Fast and reliable - it uses the same servers that translate.google.com uses
+* Author's translation into paired language. Those. there is language 1 and there is language 2, when the program receives language 1, it immediately translates it into language 2, and when it receives language 2, it translates it into language 1.
+* The translation is placed on the clipboard.
+
+#### Note use
+
+* The maximum character limit on a single text is 15k.
+* Due to limitations of the web version of google translate, this API does not guarantee that the library would work properly at all times.
+* Important: If you want to use a stable API, I highly recommend you to use Google's official translate API.
+* If you get HTTP 5xx error or errors like #6, it's probably because Google has banned your client IP address.
+
+
 <details>
   <summary><h3 id="screenshots">Screenshots</h3></summary>
   <div align="center">
-    <img src=".github/assets/preview1.png" width=580px>
-    <img src=".github/assets/preview2.png" width=580px>
+    <img src=".github/assets/preview1.png" width=800px>
+    <img src=".github/assets/preview2.png" width=800px>
   </div>
 </details>
 
@@ -127,11 +144,7 @@ make help
 
 ### Flags
 
-#### --sentence \<text\>
-
-The original application that needs to be translated.
-
-#### --to-lang \<lang\>
+#### -d/--dest [ru|en|de|it|fr|ja]
 
 Forcibly translate into the selected language.
 
