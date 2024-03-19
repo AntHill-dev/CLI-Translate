@@ -1,5 +1,5 @@
 import click
-import colorama
+import colorama  # type: ignore
 from loguru import logger
 
 import src.misc.logs as lg

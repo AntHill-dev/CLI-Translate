@@ -1,6 +1,6 @@
 from abc import ABC
 
-from colorama import Fore
+from colorama import Fore  # type: ignore
 
 
 class BaseErrorCLI(ABC, Exception):  # noqa: N818
@@ -13,10 +13,10 @@ class BaseErrorCLI(ABC, Exception):  # noqa: N818
         self.message = Fore.RED + message + Fore.RESET
 
     def __str__(self) -> str:
-        return self.message
+        return self.message  # type: ignore
 
     def __repr__(self) -> str:
-        return self.message
+        return self.message  # type: ignore
 
 
 class EmptySentenceArgumentError(BaseErrorCLI):
