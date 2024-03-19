@@ -1,23 +1,32 @@
 import sys
+from typing import NoReturn
 
 import click
+import pyperclip  # type: ignore
+from loguru import logger
 
 from src.config import CLISetting, MetaInfo
-from src.languages import SmartPreset, _translator
-from src.misc.exceptions import EmptySentenceArgumentError
-from src.misc.utils import convert_data_to_valid_string, get_type_lang, output_result, past_in_clipboard
+from src.languages import LanguageMark, SmartPreset
+from src.misc.exceptions import EmptySentenceArgumentError, LanguageNotSupportedError
+from src.misc.utils import convert_data_to_valid_string, detect_type_lang, output_result
+
+
+def _report_about_error(msg: str) -> NoReturn:
+    click.echo(f"Error: {msg}", err=True)
+    sys.exit(1)
 
 
 @click.command(context_settings=CLISetting.CONTEXT_SETTINGS)
 @click.version_option(version=MetaInfo.version, prog_name=MetaInfo.prog_name)
 @click.argument("text", nargs=-1)
 @click.option(
-    "-d", "--dest",
-    type=click.Choice(CLISetting.DEST_SOURCE, case_sensitive=False),
-    default=CLISetting.DEFAULT_TO_DEST,
+    "-d",
+    "--dest",
+    type=click.Choice(LanguageMark, case_sensitive=False),  # type: ignore
+    default=SmartPreset.dest,
     help=CLISetting.Docs.Dest,
 )
-def cli(text: tuple[str], dest: str) -> None:
+def cli(text: tuple[str], dest: LanguageMark) -> None:
     r"""Translate TEXT to DEST text.
 
     Automatically detects the language from which you need to translate to
@@ -28,30 +37,19 @@ def cli(text: tuple[str], dest: str) -> None:
     word can be translated.
 
     """
+    logger.info(f"INPUT {text = }, type: {type(text)}")
+    logger.info(f"INPUT {dest = }, type: {type(dest)}")
+
     try:
         sentence = convert_data_to_valid_string(text)
     except EmptySentenceArgumentError as ex:
-        click.echo(f"Error: {ex.message}", err=True)
-        sys.exit(1)
+        _report_about_error(ex.message)
 
-    type_lang = get_type_lang(sentence)
-    output_result(sentence, type_lang)
-    past_in_clipboard(sentence)
+    try:
+        type_lang = detect_type_lang(sentence)
+        to_copy_sentence = output_result(sentence, type_lang, dest)
+    except LanguageNotSupportedError as ex:
+        _report_about_error(ex.message)
 
-    match type_lang:
-        case SmartPreset.src:
-
-            translate_text = _translator.translate(sentence, src=type_lang, dest=SmartPreset.dest).text
-            style_text = click.style(f"'{3}'n'{3}'")
-            click.echo()
-        case SmartPreset.dest:
-            click.echo("2")
-        case _:
-            click.echo("3")
-
-    if type_lang == SmartPreset.src:
-        print(f"'{sentence}'\n'{_translator.translate(sentence, src=type_lang, dest=SmartPreset.dest).text}'")
-    elif type_lang == SmartPreset.dest:
-        print(f"'{sentence}'\n'{_translator.translate(sentence, src=type_lang, dest=SmartPreset.src).text}'")
-    else:
-        print(f"'{sentence}'\n'{_translator.translate(sentence, src=type_lang, dest=dest).text}'")
+    # copy to clipboard
+    pyperclip.copy(to_copy_sentence)

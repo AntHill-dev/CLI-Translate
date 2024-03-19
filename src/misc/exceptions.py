@@ -3,7 +3,12 @@ from abc import ABC
 from colorama import Fore
 
 
-class BaseErrorCLI(ABC, Exception):
+class BaseErrorCLI(ABC, Exception):  # noqa: N818
+    """Base class for exception to CLI-Translate.
+
+    Each error message is painted red.
+    """
+
     def __init__(self, message: str) -> None:
         self.message = Fore.RED + message + Fore.RESET
 
@@ -15,4 +20,8 @@ class BaseErrorCLI(ABC, Exception):
 
 
 class EmptySentenceArgumentError(BaseErrorCLI):
-    pass
+    """Exception for case empty enter data from user in CLI."""
+
+
+class LanguageNotSupportedError(BaseErrorCLI):
+    """Exception for case not supported dest language."""

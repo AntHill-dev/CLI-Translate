@@ -5,7 +5,7 @@ from loguru import logger
 import src.misc.logs as lg
 from src import config
 from src.main import cli
-from src.misc import exceptions
+from src.misc.exceptions import BaseErrorCLI
 
 __author__ = config.MetaInfo.author
 __copyright__ = config.MetaInfo.copyright
@@ -20,9 +20,10 @@ colorama.init()
 lg.init(__debug__)
 
 
-def main() -> None:
+@logger.catch()
+def start_cli() -> None:  # noqa: D103
     try:
         cli()
-    except exceptions.EmptySentenceArgumentError as exc:
-        logger.error(f"error: {exc}, {exc.message}")
-        click.echo(f"Error: {exc.message}")
+    except BaseErrorCLI as ex:
+        logger.error(f"error: {ex}")
+        click.echo(f"Error: {ex.message}")

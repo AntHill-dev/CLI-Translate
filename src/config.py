@@ -13,6 +13,8 @@ class _MetaInfo(BaseModel):
     email: str = "covach.qn@gmail.com"
     status: str = "Development"
 
+    prog_name: str = "CLI-Translate"
+
 
 class _RotationSettings(BaseModel):
     size: str = "2.5 MB"
@@ -22,6 +24,13 @@ class _RotationSettings(BaseModel):
 
 class _CLISetting(BaseModel):
     CONTEXT_SETTINGS: dict[str, list[str]] = {"help_option_names": ["-h", "--help"]}
+
+    class Docs:
+        Dest: str = "Forcibly translate into the selected language."
+
+    class Colors:
+        Translated: str = "green"
+        Original: str = "blue"
 
 
 MetaInfo = _MetaInfo()
