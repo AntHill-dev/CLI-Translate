@@ -1,25 +1,50 @@
+from typing import Optional
+
+import click
+from loguru import logger
+
+from src.languages import _translator
 from src.misc.exceptions import EmptySentenceArgumentError
 
 
-def get_only_letters_from(data: str) -> set:
-    """Translates a sentence into a set of letters.
+def convert_data_to_valid_string(text: Optional[tuple[str]]) -> str:
+    """Converts a tuple of strings to a single string.
 
-    If there are no letters in the sentence, an exception will be raised.
+    If the function accepts None, then it requests input from the user.
 
     Args:
-        data: A get sentence
-
-    Returns:
-        A set of letters
+        text: Input data from user or None.
 
     Raises:
-        EmptySentenceArgumentError - if you get sentence with no alpha characters
+        EmptySentenceArgumentError: If you entered an empty line.
+
+
+    Returns:
+        A single string.
 
     """
-    result = {char for char in data if char.isalpha()}
+    if not text:
+        text = tuple(click.prompt("Enter you text").split())
 
-    if len(result) == 0:
-        msg = "I received a message with no letters. There is nothing to translate!"
+    result = " ".join(text).strip()
+    logger.debug(f"Convert result: {result = }")
+
+    if not result:
+        msg = "You input a empty string."
+        logger.error("Raise exc: EmptySentenceArgumentError with 'You input a empty string.' message.")
         raise EmptySentenceArgumentError(msg)
 
     return result
+
+
+def get_type_lang(sentence: str) -> str:
+    type_language = _translator.detect(text=sentence).lang
+    return type_language
+
+
+def output_result(sentence: str, lang_type: str) -> None:
+    pass
+
+
+def past_in_clipboard(sentence: str) -> None:
+    pass
