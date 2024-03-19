@@ -1,7 +1,7 @@
 [project]
 name = "CLI-Translate"
 description = "CLI-Translate is a powerful multilingual text translation console utility developed in Python. This program provides a fast and reliable way to translate words, phrases, and even whole sentences into different languages. "
-version = "1.0.1"
+version = "1.1.1"
 readme = "README.md"
 requires-python = ">=3.11"
 
@@ -18,7 +18,7 @@ Repository = "https://github.com/Qu1nel/CLI-Translate"
 
 [tool.poetry]
 name = "CLI-Translate"
-version = "1.0.1"
+version = "1.1.1"
 description = "soon."
 authors = ["Ivan Kovach <covach.qn@gmail.com>"]
 readme = "README.md"
