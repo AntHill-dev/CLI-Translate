@@ -1,6 +1,7 @@
 path := .
 
 TEST_FOLDER := tests/
+SRC_FOLDER 	:= src/
 
 .DEFAULT_GOAL := help
 MAKEFLAGS 	  += --silent --no-print-directory
@@ -94,6 +95,10 @@ clean:  ## Clear linter cache (.mypy_cache .ruff_cache)
 .PHONY: test
 test:  ## Runs tests for the application
 	poetry run python -m pytest --verbose $(TEST_FOLDER)
+
+.PHONY: coverage
+coverage:  ## Runs tests and coverage
+	poetry run python -m pytest --verbose --cov=$(SRC_FOLDER)
 
 # Other
 ##############################################################################
