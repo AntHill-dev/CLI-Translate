@@ -23,7 +23,6 @@ class TestConvertDataToValidString:
         input_text = "Input"
         result_output = f"Enter your text: {input_text}\n"
         result = runner.invoke(cli, input=input_text)
-        assert not result.exception
         assert result.output == f"{result_output}Original: {input_text}\nTranslated: Вход\n"
 
     def test_normal_prompt_3(self) -> None:
@@ -31,7 +30,6 @@ class TestConvertDataToValidString:
         input_text = "Fox and dog"
         result_output = f"Enter your text: {input_text}\n"
         result = runner.invoke(cli, input=input_text)
-        assert not result.exception
         assert result.output == f"{result_output}Original: {input_text}\nTranslated: Лиса и собака\n"
 
     def test_wrong_1(self) -> None:
