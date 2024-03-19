@@ -17,6 +17,7 @@ class LanguageMark(StrEnum):
     FR = "fr"
     IT = "it"
     JA = "ja"
+    CH = "ch"
 
     @staticmethod
     def from_str(label: str) -> "LanguageMark":

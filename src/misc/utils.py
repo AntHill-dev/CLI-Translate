@@ -9,7 +9,7 @@ from src.languages import LanguageMark, SmartPreset, _translator, translate
 from src.misc.exceptions import EmptySentenceArgumentError, LanguageNotSupportedError
 
 
-def convert_data_to_valid_string(text: Optional[tuple[str]]) -> str:
+def convert_data_to_valid_string(text: Optional[tuple[str, ...]]) -> str:
     """Converts a tuple of strings to a single string.
 
     If the function accepts None, then it requests input from the user.
@@ -26,7 +26,7 @@ def convert_data_to_valid_string(text: Optional[tuple[str]]) -> str:
 
     """
     if not text:
-        text = tuple(click.prompt("Enter you text").split())
+        text = tuple(click.prompt("Enter your text").split())
 
     result = " ".join(text).strip()
     logger.debug(f"Convert result: {result = }")
